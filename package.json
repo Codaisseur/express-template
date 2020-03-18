@@ -1,0 +1,23 @@
+{
+  "name": "server-template",
+  "version": "1.0.0",
+  "description": "Simple express server with sequelize, pg and jwts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "npx nodemon .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "template",
+    "express",
+    "jwt",
+    "sequelize"
+  ],
+  "author": "Rein Op 't Land",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  }
+}
