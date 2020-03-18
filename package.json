@@ -8,7 +8,7 @@
     "dev": "npx nodemon .",
     "initdev": "npm run createDB && npm run migrate && npm run seed",
     "migrate": "npx sequelize-cli db:migrate",
-    "seed": "npx sequelize-cli db:seed",
+    "seed": "npx sequelize-cli db:seed:all",
     "createDB": "npx sequelize-cli db:create",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
   "author": "Rein Op 't Land",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "pg": "^7.18.2",
