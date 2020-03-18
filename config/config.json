@@ -2,8 +2,8 @@
   "development": {
     "username": "postgres",
     "password": "secret",
-    "database": "YOUR_PROJECT_NAME_HERE",
-    "host": "127.0.0.1",
+    "database": "YOUR_PROJECT_NAME_HERE_development",
+    "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": "0"
   },
