@@ -26,13 +26,50 @@ cd YOUR_PROJECT_NAME
 npm install
 ```
 
-5. start server with `nodemon` (recommended for development)
+5. Configure your database in `config/config.json`
+
+The default assumes a postgres database with
+
+- username: postgres
+- password: secret
+
+```json
+// config/config.json
+{
+  "development": {
+    "username": "postgres",
+    "password": "secret",
+    "database": "YOUR_PROJECT_NAME_HERE_development",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": "0"
+  }
+}
+```
+
+6. Create database, run migrations & seed data
+
+`package.json` contains a script for this
+
+```bash
+npm run initdev
+```
+
+Or run the commands seperately
+
+```bash
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
+
+7. start server with `nodemon` (recommended for development)
 
 ```
 npm run dev
 ```
 
-6. or start normally
+8. or start normally
 
 ```
 npm start
