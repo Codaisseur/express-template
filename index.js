@@ -2,12 +2,6 @@ const express = require("express");
 const app = express();
 
 /**
- * Config vars
- */
-
-const PORT = process.env.PORT || 4000;
-
-/**
  * Middlewares
  */
 
@@ -69,6 +63,8 @@ const authRouter = require("./routers/auth");
 app.use("/", authRouter);
 
 // Listen for connections on specified port (default is port 4000)
+const { PORT } = require("./config/constants");
+
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
