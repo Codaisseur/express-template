@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue: "#000000",
       },
+      userId: DataTypes.INTEGER,
     },
     {}
   );

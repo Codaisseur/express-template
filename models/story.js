@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       imageUrl: DataTypes.STRING,
       content: DataTypes.TEXT,
+      homepageId: DataTypes.INTEGER,
     },
     {}
   );
