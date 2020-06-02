@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "secret",
-    "database": "YOUR_PROJECT_NAME_HERE_development",
+    "database": "practice-assessment",
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": "0"
