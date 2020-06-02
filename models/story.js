@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  story.associate = function (models) {};
+  story.associate = function (models) {
+    story.belongsTo(models.homepage);
+  };
   return story;
 };

@@ -27,7 +27,7 @@ module.exports = {
           color: "#EDEDED",
           createdAt: new Date(),
           updatedAt: new Date(),
-          userId: user1.id,
+          userId: user2.id,
         },
       ],
       {}
