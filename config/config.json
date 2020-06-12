@@ -1,9 +1,6 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "secret",
-    "database": "YOUR_PROJECT_NAME_HERE_development",
-    "host": "localhost",
+    "url": "YOUR_ELEPHANTSQL_URL_HERE",
     "dialect": "postgres",
     "operatorsAliases": "0"
   },
