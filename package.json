@@ -6,12 +6,10 @@
   "scripts": {
     "start": "node .",
     "dev": "env DELAY=1000 npx nodemon .",
-    "initdev": "npm run createDB && npm run migrate && npm run seed",
+    "initdev": "npm run migrate && npm run seed",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
-    "createDB": "npx sequelize-cli db:create",
-    "dropDB": "npx sequelize-cli db:drop",
-    "resetDB": "npm run dropDB && npm run initdev",
+    "resetDB": "npx sequelize-cli db:migrate:undo:all && npm run initdev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
