@@ -21,14 +21,14 @@
   "author": "Rein Op 't Land",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
-    "pg": "^7.18.2",
-    "sequelize": "^5.21.5",
-    "sequelize-cli": "^5.5.1"
+    "pg": "^8.1.2",
+    "sequelize": "^6.2.0",
+    "sequelize-cli": "^6.0.0"
   },
   "devDependencies": {
     "axios": "^0.19.2",
