@@ -80,7 +80,6 @@ npm run initdev
 Or run the commands seperately
 
 ```bash
-npx sequelize-cli db:create
 npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
