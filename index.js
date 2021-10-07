@@ -6,14 +6,31 @@ const authRouter = require("./routers/auth");
 const authMiddleWare = require("./auth/middleware");
 
 const app = express();
-
 /**
- * Middlewares
+ * Middlewares: DO NOT REGISTER ANY ROUTERS BEFORE THE MIDDLEWARES
  *
  * It is advisable to configure your middleware before configuring the routes
  * If you configure routes before the middleware, these routes will not use them
  *
  */
+
+/**
+ *
+ * cors middleware:
+ *
+ * Since our api is hosted on a different domain than our client
+ * we are are doing "Cross Origin Resource Sharing" (cors)
+ * Cross origin resource sharing is disabled by express by default
+ * for safety reasons (should everybody be able to use your api, I don't think so!)
+ *
+ * We are configuring cors to accept all incoming requests
+ * If you want to limit this, you can look into "white listing" only certain domains
+ *
+ * docs: https://expressjs.com/en/resources/middleware/cors.html
+ *
+ */
+
+app.use(corsMiddleWare());
 
 /**
  * morgan:
@@ -51,24 +68,6 @@ app.use(bodyParserMiddleWare);
 
 /**
  *
- * cors middleware:
- *
- * Since our api is hosted on a different domain than our client
- * we are are doing "Cross Origin Resource Sharing" (cors)
- * Cross origin resource sharing is disabled by express by default
- * for safety reasons (should everybody be able to use your api, I don't think so!)
- *
- * We are configuring cors to accept all incoming requests
- * If you want to limit this, you can look into "white listing" only certain domains
- *
- * docs: https://expressjs.com/en/resources/middleware/cors.html
- *
- */
-
-app.use(corsMiddleWare());
-
-/**
- *
  * delay middleware
  *
  * Since our api and client run on the same machine in development mode
@@ -88,35 +87,9 @@ if (process.env.DELAY) {
 }
 
 /**
- *
- * authMiddleware:
- *
- * When a token is provided:
- * decrypts a jsonwebtoken to find a userId
- * queries the database to find the user with that add id
- * adds it to the request object
- * user can be accessed as req.user when handling a request
- * req.user is a sequelize User model instance
- *
- * When no or an invalid token is provided:
- * returns a 4xx reponse with an error message
- *
- * check: auth/middleware.js
- *
- * For fine grained control, import this middleware in your routers
- * and use it for specific routes
- *
- * for a demo check the following endpoints
- *
- * POST /authorized_post_request
- * GET /me
- *
- */
-
-/**
  * Routes
  *
- * Define your routes here (now that middlewares are configured)
+ * DEFINE YOUR ROUTES AFTER THIS MESSAGE (now that middlewares are configured)
  */
 
 // GET endpoint for testing purposes, can be removed
