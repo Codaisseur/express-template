@@ -1,110 +1,37 @@
 const express = require("express");
-const loggerMiddleWare = require("morgan");
 const corsMiddleWare = require("cors");
-const { PORT } = require("./config/constants");
-const authRouter = require("./routers/auth");
+// Auth middleware: our own code. Checks for the existence of a token in a header called `authentication`.
 const authMiddleWare = require("./auth/middleware");
+const authRouter = require("./routers/auth");
+const { PORT } = require("./config/constants");
 
+// Create an express app
 const app = express();
+
 /**
- * Middlewares: DO NOT REGISTER ANY ROUTERS BEFORE THE MIDDLEWARES
+ * Middlewares
  *
  * It is advisable to configure your middleware before configuring the routes
  * If you configure routes before the middleware, these routes will not use them
  *
  */
 
-/**
- *
- * cors middleware:
- *
- * Since our api is hosted on a different domain than our client
- * we are are doing "Cross Origin Resource Sharing" (cors)
- * Cross origin resource sharing is disabled by express by default
- * for safety reasons (should everybody be able to use your api, I don't think so!)
- *
- * We are configuring cors to accept all incoming requests
- * If you want to limit this, you can look into "white listing" only certain domains
- *
- * docs: https://expressjs.com/en/resources/middleware/cors.html
- *
- */
-
+// CORS middleware:  * Since our api is hosted on a different domain than our client
+// we are are doing "Cross Origin Resource Sharing" (cors)
+// Cross origin resource sharing is disabled by express by default
 app.use(corsMiddleWare());
 
-/**
- * morgan:
- *
- * simple logging middleware so you can see
- * what happened to your request
- *
- * example:
- *
- * METHOD   PATH        STATUS  RESPONSE_TIME   - Content-Length
- *
- * GET      /           200     1.807 ms        - 15
- * POST     /echo       200     10.251 ms       - 26
- * POST     /puppies    404     1.027 ms        - 147
- *
- * github: https://github.com/expressjs/morgan
- *
- */
-
-app.use(loggerMiddleWare("dev"));
-
-/**
- *
- * express.json():
- * be able to read request bodies of JSON requests
- * a.k.a. body-parser
- * Needed to be able to POST / PUT / PATCH
- *
- * docs: https://expressjs.com/en/api.html#express.json
- *
- */
-
+// express.json():be able to read request bodies of JSON requests a.k.a. body-parser
 const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
 
 /**
- *
- * delay middleware
- *
- * Since our api and client run on the same machine in development mode
- * the request come in within milliseconds
- * To simulate normal network traffic this simple middleware delays
- * the incoming requests by 1500 second
- * This allows you to practice with showing loading spinners in the client
- *
- * - it's only used when you use npm run dev to start your app
- * - the delay time can be configured in the package.json
- */
-
-if (process.env.DELAY) {
-  app.use((req, res, next) => {
-    setTimeout(() => next(), parseInt(process.env.DELAY));
-  });
-}
-
-/**
  * Routes
  *
- * DEFINE YOUR ROUTES AFTER THIS MESSAGE (now that middlewares are configured)
+ * Define your routes and attach our routers here (now that middlewares are configured)
  */
 
-// GET endpoint for testing purposes, can be removed
-app.get("/", (req, res) => {
-  res.send("Hi from express");
-});
-
-// POST endpoint for testing purposes, can be removed
-app.post("/echo", (req, res) => {
-  res.json({
-    youPosted: {
-      ...req.body,
-    },
-  });
-});
+app.use("/auth", authRouter);
 
 // POST endpoint which requires a token for testing purposes, can be removed
 app.post("/authorized_post_request", authMiddleWare, (req, res) => {
@@ -122,10 +49,6 @@ app.post("/authorized_post_request", authMiddleWare, (req, res) => {
     },
   });
 });
-
-app.use("/", authRouter);
-
-// Listen for connections on specified port (default is port 4000)
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
